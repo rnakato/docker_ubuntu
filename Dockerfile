@@ -1,6 +1,7 @@
 # Ubuntu Japanese edition
 
-FROM ubuntu:18.04
+FROM dorowu/ubuntu-desktop-lxde-vnc:bionic
+ #ubuntu:18.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iam.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
