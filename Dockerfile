@@ -1,5 +1,4 @@
 # Ubuntu Japanese edition
-
 FROM ubuntu:20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iam.u-tokyo.ac.jp>"
 
@@ -18,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        language-pack-ja \
        locales \
        make \
+       software-properties-common \
        vim \
        wget \
        && rm -rf /var/lib/apt/lists
