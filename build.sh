@@ -4,7 +4,7 @@ do
     docker push rnakato/ubuntu:$tag
 done
 
-for tag in #dorowu-bionic
+for tag in dorowu-bionic
 do
     docker build -f Dockerfile.dorowu -t rnakato/ubuntu:$tag .
     docker push rnakato/ubuntu:$tag
