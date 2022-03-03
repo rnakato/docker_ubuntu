@@ -1,11 +1,10 @@
+#FROM pytorch/pytorch:1.5-cuda10.1-cudnn7-devel
+#FROM pytorch/pytorch:1.10.0-cuda11.3-cudnn8-devel
 FROM nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-
-ENV PATH=/opt/conda/bin/:$PATH
-WORKDIR /work
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
        apt-file \
@@ -24,11 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        wget \
        && rm -rf /var/lib/apt/lists
 
-# Anaconda3
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh -O ~/anaconda.sh \
-     && bash ~/anaconda.sh -b -p /opt/conda \
-     && rm ~/anaconda.sh \
-     && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+RUN pip install -U tensorflow tensorboard tensorflow-estimator tensorflow-gpu tensorflow-probability torch torchvision keras
 
 #RUN echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen
 #RUN locale-gen
