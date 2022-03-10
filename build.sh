@@ -4,9 +4,6 @@ do
     docker push rnakato/ubuntu_gpu:$tag
 done
 
-
-exit
-
 for tag in 20.04 latest #18.04
 do
     docker build -t rnakato/ubuntu:$tag .
