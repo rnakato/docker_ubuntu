@@ -1,24 +1,32 @@
-FROM nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
+ #11.5.1-cudnn8-devel-ubuntu20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 ENV PATH=/opt/conda/bin/:$PATH
-WORKDIR /work
+WORKDIR /opt
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
        apt-file \
        apt-utils \
+       build-essential \
        cmake \
        curl \
        emacs \
+       fd-find \
        git \
        htop \
        language-pack-ja-base \
        language-pack-ja \
+       less \
+       libgd-dev \
+       libssl-dev \
        locales \
        make \
+       patch \
+       pkg-config \
        software-properties-common \
        vim \
        wget \

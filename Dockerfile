@@ -1,4 +1,3 @@
-# Ubuntu Japanese edition
 FROM ubuntu:20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
@@ -9,10 +8,11 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
+WORKDIR /opt
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
        apt-file \
        apt-utils \
-       bat \
        build-essential \
        cmake \
        curl \
@@ -22,12 +22,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        htop \
        language-pack-ja-base \
        language-pack-ja \
+       less \
        libgd-dev \
        libssl-dev \
        locales \
        make \
-       patch \ 
+       patch \
        pkg-config \
+       python \
        software-properties-common \
        vim \
        wget \
@@ -52,7 +54,7 @@ RUN bash \
        HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11 \
        XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
        Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
-       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util 
+       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util
 
 #RUN echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen
 #RUN locale-gen
