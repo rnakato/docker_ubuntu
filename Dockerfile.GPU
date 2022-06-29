@@ -38,10 +38,4 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_6
      && rm ~/anaconda.sh \
      && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 
-#RUN echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen
-#RUN locale-gen
-#ENV LANG ja_JP.UTF-8
-#ENV LANGUAGE ja_JP.UTF-8
-#ENV LC_ALL ja_JP.UTF-8
-
 CMD ["/bin/bash"]

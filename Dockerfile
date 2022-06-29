@@ -3,8 +3,6 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-#ENV LANG=C.UTF-8 LC_CTYPE=en_US.UTF-8
-
 ENV PLENV_ROOT /opt/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
@@ -55,11 +53,5 @@ RUN bash \
        XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
        Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
        Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util
-
-#RUN echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen
-#RUN locale-gen
-#ENV LANG ja_JP.UTF-8
-#ENV LANGUAGE ja_JP.UTF-8
-#ENV LC_ALL ja_JP.UTF-8
 
 CMD ["/bin/bash"]
