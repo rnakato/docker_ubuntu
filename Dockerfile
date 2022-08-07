@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        curl \
        emacs \
        fd-find \
+       fish \
        git \
        htop \
        language-pack-ja-base \

@@ -9,10 +9,3 @@ do
     docker build -t rnakato/ubuntu:$tag .
     docker push rnakato/ubuntu:$tag
 done
-
-exit
-for tag in dorowu-bionic
-do
-    docker build -f Dockerfile.dorowu -t rnakato/ubuntu:$tag .
-    docker push rnakato/ubuntu:$tag
-done
