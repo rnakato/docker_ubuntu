@@ -1,5 +1,5 @@
 FROM nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
- #11.5.1-cudnn8-devel-ubuntu20.04
+#FROM nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,9 +26,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        libssl-dev \
        locales \
        make \
+       nkf \
        patch \
        pkg-config \
        software-properties-common \
+       tree \
        vim \
        wget \
        && rm -rf /var/lib/apt/lists

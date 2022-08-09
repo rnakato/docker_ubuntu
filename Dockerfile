@@ -26,10 +26,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        libssl-dev \
        locales \
        make \
+       nkf \
        patch \
        pkg-config \
        python \
        software-properties-common \
+       tree \
        vim \
        wget \
        && rm -rf /var/lib/apt/lists
