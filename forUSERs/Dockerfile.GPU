@@ -1,8 +1,9 @@
-FROM ubuntu:20.04
+FROM nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+
 ENV PLENV_ROOT /opt/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
@@ -40,7 +41,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        wget \
        && rm -rf /var/lib/apt/lists
 
+RUN chmod 777 /opt
+
 # CPAN
+USER ubuntu
 RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/ \
     && echo 'export PLENV_ROOT=/opt/.plenv'    >> ~/.bashrc \

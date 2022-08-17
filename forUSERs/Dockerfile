@@ -40,7 +40,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        wget \
        && rm -rf /var/lib/apt/lists
 
+RUN chmod 777 /opt
+
 # CPAN
+USER ubuntu
 RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/ \
     && echo 'export PLENV_ROOT=/opt/.plenv'    >> ~/.bashrc \
