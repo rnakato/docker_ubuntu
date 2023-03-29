@@ -1,13 +1,18 @@
-FROM dorowu/ubuntu-desktop-lxde-vnc:focal
+FROM ubuntu:20.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /home/ubuntu/.plenv
+ENV PLENV_ROOT /opt/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4EB27DB2A3B88B8B \
-    && apt-get update && apt-get install -y --no-install-recommends \
+WORKDIR /opt
+SHELL ["/bin/bash", "-c"]
+
+RUN useradd ubuntu -m -u 55555 \
+  && echo "ubuntu:ubuntu" | chpasswd
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
        apt-file \
        apt-utils \
        build-essential \
@@ -25,24 +30,25 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4EB27DB2A3
        libssl-dev \
        locales \
        make \
+       nkf \
        patch \
        pkg-config \
        python \
        software-properties-common \
+       tree \
        vim \
        wget \
        && rm -rf /var/lib/apt/lists
 
 # CPAN
-RUN bash \
-    && git clone https://github.com/tokuhirom/plenv.git ~/.plenv \
-    && git clone https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ \
-    && echo 'export PLENV_ROOT=$HOME/.plenv'    >> ~/.bashrc \
-    && echo 'export PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH' >> ~/.bashrc \
+#    && echo 'export PLENV_ROOT=/opt/.plenv'    >> ~/.bashrc \
+#    && echo 'export PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH' >> ~/.bashrc \
+RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
+    && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/ \
     && echo 'eval "$(plenv init -)"' >> ~/.bashrc \
     && . ~/.bashrc \
-    && plenv install 5.32.0 \
-    && plenv global 5.32.0 \
+    && plenv install 5.36.0 \
+    && plenv global 5.36.0 \
     && plenv list-modules \
     && plenv install-cpanm \
     && cpanm Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader \
@@ -53,5 +59,7 @@ RUN bash \
        XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
        Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
        Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util
+RUN cpanm GD::Graph::lines --force
 
+USER ubuntu
 CMD ["/bin/bash"]

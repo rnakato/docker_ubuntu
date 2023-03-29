@@ -1,9 +1,8 @@
-FROM nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
+FROM ubuntu:22.04
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-
 ENV PLENV_ROOT /opt/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
@@ -34,22 +33,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        nkf \
        patch \
        pkg-config \
-       python \
        software-properties-common \
        tree \
        vim \
        wget \
        && rm -rf /var/lib/apt/lists
 
-# CPAN
+# plenv
 RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/ \
-    && echo 'export PLENV_ROOT=/opt/.plenv'    >> ~/.bashrc \
-    && echo 'export PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH' >> ~/.bashrc \
     && echo 'eval "$(plenv init -)"' >> ~/.bashrc \
     && . ~/.bashrc \
-    && plenv install 5.32.0 \
-    && plenv global 5.32.0 \
+    && plenv install 5.36.0 \
+    && plenv global 5.36.0 \
     && plenv list-modules \
     && plenv install-cpanm \
     && cpanm Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader \
@@ -59,7 +55,9 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
        HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11 \
        XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
        Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
-       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util
+       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines
+
+#RUN cpanm GD::Graph::lines --force
 
 USER ubuntu
 CMD ["/bin/bash"]

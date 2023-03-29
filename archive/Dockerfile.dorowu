@@ -1,24 +1,21 @@
-FROM ubuntu:22.04 as common
+FROM dorowu/ubuntu-desktop-lxde-vnc:focal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
+ENV PLENV_ROOT /home/ubuntu/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
-WORKDIR /opt
-SHELL ["/bin/bash", "-c"]
-
-RUN useradd ubuntu -m -u 55555 \
-  && echo "ubuntu:ubuntu" | chpasswd
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 4EB27DB2A3B88B8B \
+    && apt-get update && apt-get install -y --no-install-recommends \
        apt-file \
        apt-utils \
        build-essential \
        cmake \
        curl \
+       emacs \
        fd-find \
+       fish \
        git \
        htop \
        language-pack-ja-base \
@@ -28,16 +25,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
        libssl-dev \
        locales \
        make \
-       nkf \
        patch \
        pkg-config \
+       python \
        software-properties-common \
-       tree \
        vim \
        wget \
        && rm -rf /var/lib/apt/lists
 
-# plenv
+# CPAN
+#    && echo 'export PLENV_ROOT=/opt/.plenv'    >> ~/.bashrc \
+#    && echo 'export PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH' >> ~/.bashrc \
 RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/ \
     && echo 'eval "$(plenv init -)"' >> ~/.bashrc \
@@ -53,16 +51,7 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
        HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11 \
        XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
        Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
-       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines
+       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util
+RUN cpanm GD::Graph::lines --force
 
-# ベースイメージ1を使用したビルドステージ
-FROM ubuntu:22.04 as normal
-COPY --from=common / /
-USER ubuntu
-CMD ["/bin/bash"]
-
-# ベースイメージ2を使用したビルドステージ
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 as gpu
-COPY --from=common / /
-USER ubuntu
 CMD ["/bin/bash"]
