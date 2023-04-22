@@ -7,4 +7,5 @@
 - SAMtools 1.17
 - SRAtoolkit 3.0.2
 
-- user: ubuntu (password:ubuntu)
+- user:password
+    - ubuntu:ubuntu
