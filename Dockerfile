@@ -12,33 +12,34 @@ RUN useradd ubuntu -m -u 55555 \
   && echo "ubuntu:ubuntu" | chpasswd
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-       apt-file \
-       apt-utils \
-       build-essential \
-       cmake \
-       curl \
-       fd-find \
-       git \
-       htop \
-       language-pack-ja-base \
-       language-pack-ja \
-       less \
-       libbz2-dev \
-       libgd-dev \
-       libncurses5-dev \
-       libssl-dev \
-       locales \
-       make \
-       nkf \
-       openjdk-19-jdk-headless \
-       openjdk-19-jre \
-       patch \
-       pkg-config \
-       software-properties-common \
-       tree \
-       vim \
-       wget \
-       && rm -rf /var/lib/apt/lists
+        apt-file \
+        apt-utils \
+        build-essential \
+        cmake \
+        curl \
+        fd-find \
+        git \
+        htop \
+        language-pack-ja-base \
+        language-pack-ja \
+        less \
+        libbz2-dev \
+        libgd-dev \
+        libncurses5-dev \
+        libssl-dev \
+        locales \
+        make \
+        nkf \
+        openjdk-19-jdk-headless \
+        openjdk-19-jre \
+        patch \
+        pkg-config \
+        software-properties-common \
+        tree \
+        vim \
+        wget \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists
 
 # SAMtools 1.17
 COPY samtools-1.17.tar.bz2 samtools-1.17.tar.bz2
@@ -65,13 +66,13 @@ RUN set -e \
     && plenv list-modules \
     && plenv install-cpanm \
     && cpanm Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader \
-       HTML::TreeBuilder LWP::Protocol::https Config::Std \
-       Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util \
-       Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which \
-       HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11 \
-       XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
-       Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
-       Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines
+        HTML::TreeBuilder LWP::Protocol::https Config::Std \
+        Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util \
+        Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which \
+        HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11 \
+        XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
+        Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
+        Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines
 
 FROM ubuntu:22.04 as normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
@@ -90,7 +91,7 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.2/bin/
+ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.2/bin/:
 ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64/
 
 COPY --from=common / /
