@@ -1,7 +1,13 @@
-for tag in 2023.04 latest
+for version in 20.04 22.04
 do
-    docker build -t rnakato/ubuntu_gpu:$tag --target gpu . #--no-cache
-    docker push     rnakato/ubuntu_gpu:$tag
-    docker build -t rnakato/ubuntu:$tag     --target normal .
-    docker push     rnakato/ubuntu:$tag
+    for tag in 2023.05 latest
+    do
+        docker build -f Dockerfile.$version -t rnakato/ubuntu_gpu_$version:$tag --target gpu . #--no-cache
+        docker push     rnakato/ubuntu_gpu_$version:$tag
+        docker build -f Dockerfile.$version -t rnakato/ubuntu_$version:$tag     --target normal .
+        docker push     rnakato/ubuntu_$version:$tag
+    done
 done
+
+docker build -f Dockerfile.20.04 -t rnakato/ubuntu_gpu_20.04:cuda11.0.3-cudnn8 --target gpu_juicer .
+docker push rnakato/ubuntu_gpu_20.04:cuda11.0.3-cudnn8

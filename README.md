@@ -9,3 +9,9 @@
 
 - user:password
     - ubuntu:ubuntu
+
+
+## Changelog
+
+- 2023.05
+  - Bug fix: failed to register layer: ApplyLayer exit status 1 stdout:  stderr: lchown /root/.cpanm/work/...: invalid argument
