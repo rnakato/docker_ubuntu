@@ -97,6 +97,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
 
 COPY --from=common / /
+COPY ./.alias /root
+RUN cat /root/.alias >> /root/.bashrc
 USER ubuntu
 CMD ["/bin/bash"]
 
@@ -110,5 +112,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
 
 COPY --from=common / /
+COPY ./.alias /root
+RUN cat /root/.alias >> /root/.bashrc
 USER ubuntu
 CMD ["/bin/bash"]
