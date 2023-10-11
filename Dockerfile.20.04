@@ -94,6 +94,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
 ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.2/bin/:
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
 
 COPY --from=common / /
 USER ubuntu
@@ -104,8 +105,9 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.2/bin/:
+ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.2/bin/
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
 
 COPY --from=common / /
 USER ubuntu
