@@ -41,19 +41,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists
 
-# SAMtools 1.17
-COPY samtools-1.17.tar.bz2 samtools-1.17.tar.bz2
-RUN tar xvfj samtools-1.17.tar.bz2 \
-    && cd samtools-1.17 \
+# SAMtools 1.19.2
+ENV version=1.19.2
+COPY samtools-$version.tar.bz2 samtools-$version.tar.bz2
+RUN tar xvfj samtools-$version.tar.bz2 \
+    && cd samtools-$version \
     && ./configure \
     && make && make install \
-    && rm /opt/samtools-1.17.tar.bz2
+    && rm /opt/samtools-$version.tar.bz2
 
-# SRAtoolkit 3.0.2
-COPY sratoolkit.3.0.2-ubuntu64.tar.gz sratoolkit.3.0.2-ubuntu64.tar.gz
-RUN tar zxvf sratoolkit.3.0.2-ubuntu64.tar.gz \
-    && mv sratoolkit.3.0.2-ubuntu64/ /opt/sratoolkit.3.0.2 \
-    && rm sratoolkit.3.0.2-ubuntu64.tar.gz
+# SRAtoolkit 3.0.10
+ENV version=3.0.10
+COPY sratoolkit.$version-ubuntu64.tar.gz sratoolkit.$version-ubuntu64.tar.gz
+RUN tar zxvf sratoolkit.$version-ubuntu64.tar.gz \
+    && mv sratoolkit.$version-ubuntu64/ /opt/sratoolkit.$version \
+    && rm sratoolkit.$version-ubuntu64.tar.gz
 
 # plenv
 RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
@@ -74,6 +76,7 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines \
         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace \
     && rm -rf /root/.cpanm/work
+#    && cpanm Bio::ToolBox \
 
 FROM ubuntu:20.04 as normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"

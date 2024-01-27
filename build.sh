@@ -1,6 +1,6 @@
 for version in 22.04 20.04
 do
-    for tag in 2023.11 #latest
+    for tag in 2024.01 latest
     do
         docker build -f Dockerfile.$version -t rnakato/ubuntu_gpu_$version:$tag --target gpu . #--no-cache
         docker push     rnakato/ubuntu_gpu_$version:$tag
