@@ -50,7 +50,9 @@ Run Ubuntu 20.04:
     # with GPU
     docker run -it --rm rnakato/ubuntu_gpu_20.04 /bin/bash
 
-The default user is `ubuntu`. Add `-u root` if you want to login as root.
+The default user is `ubuntu`. Add `-u root` if you want to login as root:
+
+    docker run -it --rm -u root rnakato/ubuntu_20.04 /bin/bash
 
 ## Build images from Dockerfile
 
