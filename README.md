@@ -12,7 +12,7 @@
 - SRAtoolkit 3.0.10
 
 - user:password
-    - ubuntu:ubuntu
+    - `ubuntu:ubuntu`
 
 
 ## Changelog
@@ -43,7 +43,7 @@ Run Ubuntu 22.04:
     # with GPU
     docker run -it --rm rnakato/ubuntu_gpu_22.04 /bin/bash
 
-RunUbuntu 20.04:
+Run Ubuntu 20.04:
 
     # normal
     docker run -it --rm rnakato/ubuntu_20.04 /bin/bash
