@@ -20,6 +20,7 @@
 - 2024.01
   - Updated SAMtools from 1.17 to 1.19.2
   - Updated SRAtoolkit from 3.0.2 to 3.0.10
+  - Change WORKDIR from /opt to /home/ubuntu
 
 - 2023.11
   - Removed LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64

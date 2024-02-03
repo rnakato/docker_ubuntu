@@ -91,6 +91,7 @@ COPY --from=common / /
 COPY ./.alias /root
 RUN cat /root/.alias >> /root/.bashrc
 USER ubuntu
+WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
 
 FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 as gpu
@@ -106,4 +107,5 @@ COPY --from=common / /
 COPY ./.alias /root
 RUN cat /root/.alias >> /root/.bashrc
 USER ubuntu
+WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
