@@ -17,6 +17,9 @@
 
 ## Changelog
 
+- 2024.02
+  - Install MS core fonts (ttf-mscorefonts-installer)
+
 - 2024.01
   - Updated SAMtools from 1.17 to 1.19.2
   - Updated SRAtoolkit from 3.0.2 to 3.0.10

@@ -40,6 +40,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         tree \
         vim \
         wget \
+    && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections \
+    && apt-get install -y --no-install-recommends ttf-mscorefonts-installer \
+    && fc-cache -f \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists
 
@@ -78,7 +81,7 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines \
         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace \
     && rm -rf /root/.cpanm/work
-#RUN cpanm Bio::ToolBox \
+#RUN cpanm Bio::ToolBox 
 
 RUN gpasswd -a ubuntu sudo
 
