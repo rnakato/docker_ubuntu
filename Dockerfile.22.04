@@ -81,7 +81,7 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines \
         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace \
     && rm -rf /root/.cpanm/work
-#RUN cpanm Bio::ToolBox 
+#RUN cpanm Bio::ToolBox
 
 RUN gpasswd -a ubuntu sudo
 
@@ -115,3 +115,19 @@ RUN cat /root/.alias >> /root/.bashrc
 USER ubuntu
 WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
+
+#FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 as gpu_juicer
+#LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
+#ENV DEBIAN_FRONTEND=noninteractive
+#ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+#ENV PLENV_ROOT /opt/.plenv
+#ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.10/bin/:
+#ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
+#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
+
+#COPY --from=common / /
+#COPY ./.alias /root
+#RUN cat /root/.alias >> /root/.bashrc
+#USER ubuntu
+#WORKDIR /home/ubuntu
+#CMD ["/bin/bash"]
