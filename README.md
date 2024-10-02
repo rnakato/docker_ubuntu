@@ -2,20 +2,24 @@
 
 - Ubuntu 22.04/20.04
 
+
 - GPU mode (cuda:11.8.0-cudnn8-runtime)
    - CUDA 11.8
    - cudnn 8
 
 - Perl 5.36.0 (with plenv)
 
-- SAMtools 1.19.2
-- SRAtoolkit 3.0.10
+- SAMtools 1.21
+- SRAtoolkit 3.1.1
 
 - user:password
     - `ubuntu:ubuntu`
 
-
 ## Changelog
+
+- 2024.10
+  - Updated SAMtools from 1.19.2 to 1.21
+  - Updated SRA Toolkit from 3.0.10 to v3.1.1
 
 - 2024.02
   - Install MS core fonts (ttf-mscorefonts-installer)

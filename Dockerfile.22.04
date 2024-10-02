@@ -46,8 +46,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists
 
-# SAMtools 1.19.2
-ENV version=1.19.2
+# SAMtools
+ENV version=1.21
 COPY samtools-$version.tar.bz2 samtools-$version.tar.bz2
 RUN tar xvfj samtools-$version.tar.bz2 \
     && cd samtools-$version \
@@ -55,8 +55,8 @@ RUN tar xvfj samtools-$version.tar.bz2 \
     && make && make install \
     && rm /opt/samtools-$version.tar.bz2
 
-# SRAtoolkit 3.0.10
-ENV version=3.0.10
+# SRAtoolkit
+ENV version=3.1.1
 COPY sratoolkit.$version-ubuntu64.tar.gz sratoolkit.$version-ubuntu64.tar.gz
 RUN tar zxvf sratoolkit.$version-ubuntu64.tar.gz \
     && mv sratoolkit.$version-ubuntu64/ /opt/sratoolkit.$version \
@@ -90,7 +90,7 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.10/bin/:
+ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.1.1/bin/:
 ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64/
 
 COPY --from=common / /
@@ -105,29 +105,20 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.10/bin/:
+ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.1.1/bin/:
 ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64/
 #ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
 
 COPY --from=common / /
 COPY ./.alias /root
 RUN cat /root/.alias >> /root/.bashrc
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nvidia-cuda-toolkit \
+    && apt-get autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 USER ubuntu
 WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
-
-#FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 as gpu_juicer
-#LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
-#ENV DEBIAN_FRONTEND=noninteractive
-#ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-#ENV PLENV_ROOT /opt/.plenv
-#ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.10/bin/:
-#ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
-#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
-
-#COPY --from=common / /
-#COPY ./.alias /root
-#RUN cat /root/.alias >> /root/.bashrc
-#USER ubuntu
-#WORKDIR /home/ubuntu
-#CMD ["/bin/bash"]
