@@ -1,7 +1,9 @@
 for version in 22.04 20.04
 do
-    for tag in 2024.10 latest
+    for tag in 2025.08 latest
     do
+#        docker buildx build -f Dockerfile.$version -t rnakato/ubuntu_$version:test --target normal .
+#	exit
         docker build -f Dockerfile.$version -t rnakato/ubuntu_$version:$tag --target normal .
         docker push     rnakato/ubuntu_$version:$tag
         docker build -f Dockerfile.$version -t rnakato/ubuntu_gpu_$version:$tag --target gpu . #--no-cache

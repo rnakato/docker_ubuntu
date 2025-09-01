@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as common
+FROM ubuntu:22.04 AS common
 
 WORKDIR /opt
 SHELL ["/bin/bash", "-c"]
@@ -47,7 +47,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists
 
 # SAMtools
-ENV version=1.21
+ENV version=1.22.1
 COPY samtools-$version.tar.bz2 samtools-$version.tar.bz2
 RUN tar xvfj samtools-$version.tar.bz2 \
     && cd samtools-$version \
@@ -56,7 +56,7 @@ RUN tar xvfj samtools-$version.tar.bz2 \
     && rm /opt/samtools-$version.tar.bz2
 
 # SRAtoolkit
-ENV version=3.1.1
+ENV version=3.2.1
 COPY sratoolkit.$version-ubuntu64.tar.gz sratoolkit.$version-ubuntu64.tar.gz
 RUN tar zxvf sratoolkit.$version-ubuntu64.tar.gz \
     && mv sratoolkit.$version-ubuntu64/ /opt/sratoolkit.$version \

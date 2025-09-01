@@ -9,13 +9,17 @@
 
 - Perl 5.36.0 (with plenv)
 
-- SAMtools 1.21
-- SRAtoolkit 3.1.1
+- SAMtools 1.22.1
+- SRAtoolkit 3.2.1
 
 - user:password
     - `ubuntu:ubuntu`
 
 ## Changelog
+
+- 2025.08
+  - Updated SAMtools from 1.21 to 1.22.1
+  - Updated SRA Toolkit from 3.1.1 to 3.2.1
 
 - 2024.10
   - Updated SAMtools from 1.19.2 to 1.21
