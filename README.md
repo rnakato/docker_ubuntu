@@ -2,7 +2,6 @@
 
 - Ubuntu 22.04/20.04
 
-
 - GPU mode (cuda:11.8.0-cudnn8-runtime)
    - CUDA 11.8
    - cudnn 8
