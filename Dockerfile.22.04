@@ -31,8 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         locales \
         make \
         nkf \
-        openjdk-19-jdk-headless \
-        openjdk-19-jre \
+        openjdk-21-jdk-headless \
+        openjdk-21-jre \
         patch \
         pkg-config \
         software-properties-common \
@@ -90,8 +90,8 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.1.1/bin/:
-ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64/
+ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64/
 
 COPY --from=common / /
 COPY ./.alias /root
@@ -105,9 +105,8 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.1.1/bin/:
-ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64/
-#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
+ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64/
 
 COPY --from=common / /
 COPY ./.alias /root

@@ -1,6 +1,6 @@
-for version in 22.04 20.04
+for version in 22.04 #20.04
 do
-    for tag in 2025.08 latest
+    for tag in 2026.03 latest
     do
 #        docker buildx build -f Dockerfile.$version -t rnakato/ubuntu_$version:test --target normal .
 #	exit
