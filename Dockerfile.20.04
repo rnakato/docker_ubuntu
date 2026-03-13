@@ -31,8 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         locales \
         make \
         nkf \
-        openjdk-19-jdk-headless \
-        openjdk-19-jre \
+        openjdk-17-jdk-headless \
+        openjdk-17-jre \
         patch \
         pkg-config \
         software-properties-common \
@@ -80,10 +80,10 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11 \
         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic \
         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL \
-        Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines \
-        XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace \
+        Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util \
+        XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 \
     && rm -rf /root/.cpanm/work
-#    && cpanm Bio::ToolBox \
+#    && cpanm GD::Graph::lines Test::LeakTrace Bio::ToolBox \
 
 RUN gpasswd -a ubuntu sudo
 
