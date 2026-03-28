@@ -5,8 +5,8 @@ SHELL ["/bin/bash", "-c"]
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
+ENV PLENV_ROOT=/opt/.plenv
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
 RUN useradd ubuntu -m -u 55555 \
   && echo "ubuntu:ubuntu" | chpasswd
@@ -85,13 +85,13 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
 
 RUN gpasswd -a ubuntu sudo
 
-FROM ubuntu:22.04 as normal
+FROM ubuntu:22.04 AS normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
-ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64/
+ENV PLENV_ROOT=/opt/.plenv
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
 
 COPY --from=common / /
 COPY ./.alias /root
@@ -100,13 +100,13 @@ USER ubuntu
 WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
 
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 as gpu
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 AS gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
-ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64/
+ENV PLENV_ROOT=/opt/.plenv
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
 
 COPY --from=common / /
 COPY ./.alias /root

@@ -1,0 +1,80 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.22.04
+#1 transferring dockerfile: 4.23kB done
+#1 DONE 0.2s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:22.04
+#2 ...
+
+#3 [auth] library/ubuntu:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 1.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.2s
+
+#5 [common  1/10] FROM docker.io/library/ubuntu:22.04@sha256:3ba65aa20f86a0fad9df2b2c259c613df006b2e6d0bfcc8a146afb8c525a9751
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 431B done
+#6 DONE 0.2s
+
+#7 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libgd-dev         libncurses5-dev         libssl-dev         locales         make         nkf         openjdk-21-jdk-headless         openjdk-21-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#7 CACHED
+
+#8 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.36.0     && plenv global 5.36.0     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace     && rm -rf /root/.cpanm/work
+#8 CACHED
+
+#9 [common  8/10] RUN tar zxvf sratoolkit.3.2.1-ubuntu64.tar.gz     && mv sratoolkit.3.2.1-ubuntu64/ /opt/sratoolkit.3.2.1     && rm sratoolkit.3.2.1-ubuntu64.tar.gz
+#9 CACHED
+
+#10 [normal 2/5] COPY --from=common / /
+#10 CACHED
+
+#11 [common  3/10] RUN useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#11 CACHED
+
+#12 [common  6/10] RUN tar xvfj samtools-1.22.1.tar.bz2     && cd samtools-1.22.1     && ./configure     && make && make install     && rm /opt/samtools-1.22.1.tar.bz2
+#12 CACHED
+
+#13 [common 10/10] RUN gpasswd -a ubuntu sudo
+#13 CACHED
+
+#14 [common  2/10] WORKDIR /opt
+#14 CACHED
+
+#15 [common  5/10] COPY samtools-1.22.1.tar.bz2 samtools-1.22.1.tar.bz2
+#15 CACHED
+
+#16 [common  7/10] COPY sratoolkit.3.2.1-ubuntu64.tar.gz sratoolkit.3.2.1-ubuntu64.tar.gz
+#16 CACHED
+
+#17 [normal 3/5] COPY ./.alias /root
+#17 CACHED
+
+#18 [normal 4/5] RUN cat /root/.alias >> /root/.bashrc
+#18 DONE 2.4s
+
+#19 [normal 5/5] WORKDIR /home/ubuntu
+#19 DONE 1.5s
+
+#20 exporting to image
+#20 exporting layers
+#20 exporting layers 0.7s done
+#20 writing image sha256:2462967a0aea2ad30f72c4f0ce3a8d0f549dbcb4221efc3aeecf65d47649d30f 0.0s done
+#20 naming to docker.io/rnakato/ubuntu_22.04:2026.03 0.1s done
+#20 DONE 1.1s
+
+ [33m7 warnings found (use --debug to expand):
+[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 88)
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 103)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 8)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 9)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 92)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 93)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 94)

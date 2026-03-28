@@ -5,8 +5,8 @@ SHELL ["/bin/bash", "-c"]
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
+ENV PLENV_ROOT=/opt/.plenv
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
 RUN useradd ubuntu -m -u 55555 \
   && echo "ubuntu:ubuntu" | chpasswd
@@ -91,9 +91,9 @@ FROM ubuntu:20.04 AS normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
-ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64/
+ENV PLENV_ROOT=/opt/.plenv
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV JAVA_HOME=/usr/lib/jvm/java-19-openjdk-amd64/
 
 COPY --from=common / /
 USER ubuntu
@@ -120,9 +120,9 @@ FROM nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04 AS gpu_juicer
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PLENV_ROOT /opt/.plenv
-ENV PATH $PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.10/bin/:
-ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
+ENV PLENV_ROOT=/opt/.plenv
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.0.10/bin/:
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
 
 COPY --from=common / /
 COPY ./.alias /root
