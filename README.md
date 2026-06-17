@@ -9,13 +9,19 @@
 - Perl 5.36.0 (with plenv)
 
 - SAMtools 1.22.1
-- SRAtoolkit 3.2.1
+- SRAtoolkit 3.4.1
 
 - user:password
     - `ubuntu:ubuntu`
 
 ## Changelog
 
+- 2026.06
+  - Added ``isnumber.sh``
+
+- 2026.04
+  - Updated SRA Toolkit from 3.2.1 to v3.4.1
+  
 - 2026.03
   - Bug fix: lost path to sratoolkit 3.2.1 in PATH
   

@@ -56,7 +56,7 @@ RUN tar xvfj samtools-$version.tar.bz2 \
     && rm /opt/samtools-$version.tar.bz2
 
 # SRAtoolkit
-ENV version=3.2.1
+ENV version=3.4.1
 COPY sratoolkit.$version-ubuntu64.tar.gz sratoolkit.$version-ubuntu64.tar.gz
 RUN tar zxvf sratoolkit.$version-ubuntu64.tar.gz \
     && mv sratoolkit.$version-ubuntu64/ /opt/sratoolkit.$version \
@@ -90,8 +90,10 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT=/opt/.plenv
-ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.4.1/bin/:
 ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
+
+COPY isnumber.sh /opt/bin/isnumber.sh
 
 COPY --from=common / /
 COPY ./.alias /root
@@ -105,8 +107,10 @@ LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT=/opt/.plenv
-ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.2.1/bin/:
+ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH:/opt/bin:/opt/sratoolkit.3.4.1/bin/:
 ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
+
+COPY isnumber.sh /opt/bin/isnumber.sh
 
 COPY --from=common / /
 COPY ./.alias /root

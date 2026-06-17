@@ -1,0 +1,129 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.22.04
+#1 transferring dockerfile: 4.30kB done
+#1 DONE 0.2s
+
+#2 [auth] library/ubuntu:pull token for registry-1.docker.io
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/ubuntu:22.04
+#3 DONE 1.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.2s
+
+#5 [common  1/10] FROM docker.io/library/ubuntu:22.04@sha256:4f838adc7181d9039ac795a7d0aba05a9bd9ecd480d294483169c5def983b64d
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 849B done
+#6 DONE 0.2s
+
+#7 [normal 2/6] COPY isnumber.sh /opt/bin/isnumber.sh
+#7 CACHED
+
+#8 [common  2/10] WORKDIR /opt
+#8 CACHED
+
+#9 [common  8/10] RUN tar zxvf sratoolkit.3.4.1-ubuntu64.tar.gz     && mv sratoolkit.3.4.1-ubuntu64/ /opt/sratoolkit.3.4.1     && rm sratoolkit.3.4.1-ubuntu64.tar.gz
+#9 CACHED
+
+#10 [common  5/10] COPY samtools-1.22.1.tar.bz2 samtools-1.22.1.tar.bz2
+#10 CACHED
+
+#11 [common  3/10] RUN useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#11 CACHED
+
+#12 [normal 3/6] COPY --from=common / /
+#12 CACHED
+
+#13 [normal 4/6] COPY ./.alias /root
+#13 CACHED
+
+#14 [common  6/10] RUN tar xvfj samtools-1.22.1.tar.bz2     && cd samtools-1.22.1     && ./configure     && make && make install     && rm /opt/samtools-1.22.1.tar.bz2
+#14 CACHED
+
+#15 [normal 5/6] RUN cat /root/.alias >> /root/.bashrc
+#15 CACHED
+
+#16 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libgd-dev         libncurses5-dev         libssl-dev         locales         make         nkf         openjdk-21-jdk-headless         openjdk-21-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#16 CACHED
+
+#17 [common 10/10] RUN gpasswd -a ubuntu sudo
+#17 CACHED
+
+#18 [common  7/10] COPY sratoolkit.3.4.1-ubuntu64.tar.gz sratoolkit.3.4.1-ubuntu64.tar.gz
+#18 CACHED
+
+#19 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.36.0     && plenv global 5.36.0     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace     && rm -rf /root/.cpanm/work
+#19 CACHED
+
+#20 [normal 6/6] WORKDIR /home/ubuntu
+#20 CACHED
+
+#21 exporting to image
+#21 exporting layers done
+#21 writing image sha256:86fc0ac40a2cf4c7c103f67c2c14d4b03ba505b0b095c184383f83607ee52ca9 0.0s done
+#21 naming to docker.io/rnakato/ubuntu_22.04:2026.06 0.1s done
+#21 DONE 0.2s
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.20.04
+#1 transferring dockerfile:
+#1 transferring dockerfile: 4.70kB done
+#1 DONE 0.2s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:20.04
+#2 DONE 0.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.2s
+
+#4 [common  1/10] FROM docker.io/library/ubuntu:20.04@sha256:8feb4d8ca5354def3d8fce243717141ce31e2c428701f6682bd2fafe15388214
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 305B done
+#5 DONE 0.2s
+
+#6 [normal 2/3] COPY --from=common / /
+#6 CACHED
+
+#7 [common  2/10] WORKDIR /opt
+#7 CACHED
+
+#8 [common  3/10] RUN useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#8 CACHED
+
+#9 [common  6/10] RUN tar xvfj samtools-1.22.1.tar.bz2     && cd samtools-1.22.1     && ./configure     && make && make install     && rm /opt/samtools-1.22.1.tar.bz2
+#9 CACHED
+
+#10 [common  7/10] COPY sratoolkit.3.4.1-ubuntu64.tar.gz sratoolkit.3.4.1-ubuntu64.tar.gz
+#10 CACHED
+
+#11 [common  8/10] RUN tar zxvf sratoolkit.3.4.1-ubuntu64.tar.gz     && mv sratoolkit.3.4.1-ubuntu64/ /opt/sratoolkit.3.4.1     && rm sratoolkit.3.4.1-ubuntu64.tar.gz
+#11 CACHED
+
+#12 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libgd-dev         libncurses5-dev         libssl-dev         locales         make         nkf         openjdk-17-jdk-headless         openjdk-17-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && apt-add-repository ppa:fish-shell/release-3     && apt-get update && apt-get install -y --no-install-recommends fish     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#12 CACHED
+
+#13 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.36.0     && plenv global 5.36.0     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11     && rm -rf /root/.cpanm/work
+#13 CACHED
+
+#14 [common  5/10] COPY samtools-1.22.1.tar.bz2 samtools-1.22.1.tar.bz2
+#14 CACHED
+
+#15 [common 10/10] RUN gpasswd -a ubuntu sudo
+#15 CACHED
+
+#16 [normal 3/3] WORKDIR /home/ubuntu
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers done
+#17 writing image sha256:43c829fab0608777265a8929b5c13c7a375e313dbd0c50ca535a486649883c04 0.0s done
+#17 naming to docker.io/rnakato/ubuntu_20.04:2026.06 0.1s done
+#17 DONE 0.2s
