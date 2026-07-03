@@ -1,4 +1,4 @@
-for version in 20.04 #22.04 20.04
+for version in 22.04 20.04
 do
     for tag in 2026.06 latest
     do
