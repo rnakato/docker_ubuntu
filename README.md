@@ -1,20 +1,34 @@
 # docker_ubuntu
 
-- Ubuntu 22.04/20.04
+- Ubuntu 26.04/24.04/22.04/20.04
 
-- GPU mode (cuda:11.8.0-cudnn8-runtime)
-   - CUDA 11.8
-   - cudnn 8
+- GPU mode
+   - 26.04/24.04: cuda:13.3.1-cudnn-runtime (CUDA 13.3, cuDNN 9.24)
+   - 22.04/20.04: cuda:11.8.0-cudnn8-runtime (CUDA 11.8, cuDNN 8)
 
-- Perl 5.36.0 (with plenv)
+- Perl (with plenv)
+   - 5.42.3
 
-- SAMtools 1.22.1
+- SAMtools 1.24
 - SRAtoolkit 3.4.1
 
 - user:password
     - `ubuntu:ubuntu`
 
 ## Changelog
+
+- 2026.09
+  - Updated Perl from 5.36.0 to 5.42.3
+  - Updated SAMtools from 1.22.1 to 1.24
+  - Added `libcurl4-openssl-dev` to enable libcurl (HTTPS/S3/GCS) support in SAMtools
+  - Added `libdeflate-dev` to enable libdeflate in SAMtools (previously enabled only on
+    22.04 and later, as an indirect dependency of `libgd-dev`)
+  - Added Ubuntu 26.04 and 24.04
+    - `libncurses5-dev` is no longer available; replaced with `libncurses-dev`
+    - The base images ship an `ubuntu` user (UID 1000), which is recreated with UID 55555
+    - GPU mode uses cuda:13.3.1-cudnn-runtime (the only tag available for 26.04)
+    - `nvidia-cuda-toolkit` is not installed in GPU mode (`nvcc` is not included;
+      use a `-devel` CUDA base image if you need to compile CUDA code)
 
 - 2026.06
   - Added ``isnumber.sh``
@@ -57,6 +71,20 @@
 
 ## Usage
 
+Run Ubuntu 26.04:
+
+    # normal
+    docker run -it --rm rnakato/ubuntu_26.04 /bin/bash
+    # with GPU
+    docker run -it --rm rnakato/ubuntu_gpu_26.04 /bin/bash
+
+Run Ubuntu 24.04:
+
+    # normal
+    docker run -it --rm rnakato/ubuntu_24.04 /bin/bash
+    # with GPU
+    docker run -it --rm rnakato/ubuntu_gpu_24.04 /bin/bash
+
 Run Ubuntu 22.04:
 
     # normal
@@ -77,7 +105,7 @@ The default user is `ubuntu`. Add `-u root` if you want to login as root:
 
 ## Build images from Dockerfile
 
-    version=22.04 # or 20.04
+    version=26.04 # or 24.04, 22.04, 20.04
 
     # normal
     docker build -f Dockerfile.$version -t youracount/ubuntu_$version -target normal .

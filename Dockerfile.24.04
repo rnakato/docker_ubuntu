@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS common
+FROM ubuntu:24.04 AS common
 
 WORKDIR /opt
 SHELL ["/bin/bash", "-c"]
@@ -8,7 +8,9 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PLENV_ROOT=/opt/.plenv
 ENV PATH=$PLENV_ROOT/bin:$PLENV_ROOT/shims:$PATH
 
-RUN useradd ubuntu -m -u 55555 \
+# The base image ships an 'ubuntu' user (UID 1000); recreate it with UID 55555
+RUN userdel -r ubuntu 2>/dev/null || true \
+  && useradd ubuntu -m -u 55555 \
   && echo "ubuntu:ubuntu" | chpasswd
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -28,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libdeflate-dev \
         libgd-dev \
-        libncurses5-dev \
+        libncurses-dev \
         libssl-dev \
         locales \
         make \
@@ -87,7 +89,7 @@ RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv \
 
 RUN gpasswd -a ubuntu sudo
 
-FROM ubuntu:22.04 AS normal
+FROM ubuntu:24.04 AS normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -104,7 +106,7 @@ USER ubuntu
 WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
 
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 AS gpu
+FROM nvidia/cuda:13.3.1-cudnn-runtime-ubuntu24.04 AS gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -117,12 +119,6 @@ COPY isnumber.sh /opt/bin/isnumber.sh
 COPY --from=common / /
 COPY ./.alias /root
 RUN cat /root/.alias >> /root/.bashrc
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends nvidia-cuda-toolkit \
-    && apt-get autoremove -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
 
 USER ubuntu
 WORKDIR /home/ubuntu

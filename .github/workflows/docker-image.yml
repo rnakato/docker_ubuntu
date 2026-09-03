@@ -12,7 +12,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [ "26.04", "24.04", "22.04", "20.04" ]
+
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.22.04 --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile.${{ matrix.version }} --target normal --tag my-image-name:$(date +%s)
