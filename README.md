@@ -23,22 +23,23 @@
   - Added `libcurl4-openssl-dev` to enable libcurl (HTTPS/S3/GCS) support in SAMtools
   - Added `libdeflate-dev` to enable libdeflate in SAMtools (previously enabled only on
     22.04 and later, as an indirect dependency of `libgd-dev`)
+  - `nvidia-cuda-toolkit` is no longer installed in GPU mode; it was removed from
+    Ubuntu22.04_gpu, which is the only version that had it (image size: 9.6 GB to 5.6 GB).
+    `nvcc` is not included; use a `-devel` CUDA base image if you need to compile CUDA code
   - Added Ubuntu 26.04 and 24.04
     - `libncurses5-dev` is no longer available; replaced with `libncurses-dev`
     - The base images ship an `ubuntu` user (UID 1000), which is recreated with UID 55555
     - GPU mode uses cuda:13.3.1-cudnn-runtime (the only tag available for 26.04)
-    - `nvidia-cuda-toolkit` is not installed in GPU mode (`nvcc` is not included;
-      use a `-devel` CUDA base image if you need to compile CUDA code)
 
 - 2026.06
   - Added ``isnumber.sh``
 
 - 2026.04
   - Updated SRA Toolkit from 3.2.1 to v3.4.1
-  
+
 - 2026.03
   - Bug fix: lost path to sratoolkit 3.2.1 in PATH
-  
+
 - 2025.08
   - Updated SAMtools from 1.21 to 1.22.1
   - Updated SRA Toolkit from 3.1.1 to 3.2.1

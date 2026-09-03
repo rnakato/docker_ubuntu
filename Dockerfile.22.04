@@ -118,12 +118,6 @@ COPY --from=common / /
 COPY ./.alias /root
 RUN cat /root/.alias >> /root/.bashrc
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends nvidia-cuda-toolkit \
-    && apt-get autoremove -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 USER ubuntu
 WORKDIR /home/ubuntu
 CMD ["/bin/bash"]

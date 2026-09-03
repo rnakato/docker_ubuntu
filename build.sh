@@ -1,9 +1,9 @@
-for version in 26.04 24.04 22.04 20.04
+for version in 22.04 #26.04 24.04 22.04 20.04
 do
     for tag in 2026.09 latest
     do
-        docker build -f Dockerfile.$version -t rnakato/ubuntu_$version:$tag --target normal .
-        docker push     rnakato/ubuntu_$version:$tag
+#        docker build -f Dockerfile.$version -t rnakato/ubuntu_$version:$tag --target normal .
+#        docker push     rnakato/ubuntu_$version:$tag
         docker build -f Dockerfile.$version -t rnakato/ubuntu_gpu_$version:$tag --target gpu . #--no-cache
         docker push     rnakato/ubuntu_gpu_$version:$tag
     done

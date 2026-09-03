@@ -1,0 +1,241 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.22.04
+#1 transferring dockerfile:
+#1 transferring dockerfile: 4.17kB 0.0s done
+#1 DONE 0.6s
+
+#2 [internal] load metadata for docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+#2 ...
+
+#3 [internal] load metadata for docker.io/library/ubuntu:22.04
+#3 DONE 0.0s
+
+#4 [auth] nvidia/cuda:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+#2 DONE 1.5s
+
+#5 [internal] load .dockerignore
+#5 transferring context:
+#5 transferring context: 2B done
+#5 DONE 0.7s
+
+#6 [common  1/10] FROM docker.io/library/ubuntu:22.04
+#6 DONE 0.0s
+
+#7 [gpu 1/6] FROM docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04@sha256:85fb7ac694079fff1061a0140fd5b5a641997880e12112d92589c3bbb1e8b7ca
+#7 DONE 0.0s
+
+#8 [internal] load build context
+#8 transferring context: 616B done
+#8 DONE 0.6s
+
+#9 [common  2/10] WORKDIR /opt
+#9 CACHED
+
+#10 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libcurl4-openssl-dev         libdeflate-dev         libgd-dev         libncurses5-dev         libssl-dev         locales         make         nkf         openjdk-21-jdk-headless         openjdk-21-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#10 CACHED
+
+#11 [common  7/10] COPY sratoolkit.3.4.1-ubuntu64.tar.gz sratoolkit.3.4.1-ubuntu64.tar.gz
+#11 CACHED
+
+#12 [gpu 4/6] COPY ./.alias /root
+#12 CACHED
+
+#13 [common  8/10] RUN tar zxvf sratoolkit.3.4.1-ubuntu64.tar.gz     && mv sratoolkit.3.4.1-ubuntu64/ /opt/sratoolkit.3.4.1     && rm sratoolkit.3.4.1-ubuntu64.tar.gz
+#13 CACHED
+
+#14 [common  5/10] COPY samtools-1.24.tar.bz2 samtools-1.24.tar.bz2
+#14 CACHED
+
+#15 [gpu 3/6] COPY --from=common / /
+#15 CACHED
+
+#16 [common  3/10] RUN useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#16 CACHED
+
+#17 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.42.3     && plenv global 5.42.3     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace     && rm -rf /root/.cpanm/work
+#17 CACHED
+
+#18 [common  6/10] RUN tar xvfj samtools-1.24.tar.bz2     && cd samtools-1.24     && ./configure     && make && make install     && rm /opt/samtools-1.24.tar.bz2
+#18 CACHED
+
+#19 [gpu 2/6] COPY isnumber.sh /opt/bin/isnumber.sh
+#19 CACHED
+
+#20 [common 10/10] RUN gpasswd -a ubuntu sudo
+#20 CACHED
+
+#21 [gpu 5/6] RUN cat /root/.alias >> /root/.bashrc
+#21 CACHED
+
+#22 [gpu 6/6] WORKDIR /home/ubuntu
+#22 DONE 2.5s
+
+#23 exporting to image
+#23 exporting layers
+#23 exporting layers 0.8s done
+#23 writing image sha256:e21e94f2e9ca07961ddc786bbe192a80d6fc83b057560d46f39db445b4d18670 0.0s done
+#23 naming to docker.io/rnakato/ubuntu_gpu_22.04:2026.09 0.1s done
+#23 DONE 1.1s
+The push refers to repository [docker.io/rnakato/ubuntu_gpu_22.04]
+5f70bf18a086: Preparing
+e59e7af2d4d2: Preparing
+7b5b7a1266c0: Preparing
+6a37524b6019: Preparing
+ff39130fdb48: Preparing
+04b6eafdd5ee: Preparing
+345cfa465206: Preparing
+dcb0f55f81ad: Preparing
+399d155a03b0: Preparing
+bc352a27a0e4: Preparing
+498bbcc60d01: Preparing
+c0e21dcee623: Preparing
+d6b19a46b795: Preparing
+e6c05e83c163: Preparing
+256d88da4185: Preparing
+399d155a03b0: Waiting
+bc352a27a0e4: Waiting
+498bbcc60d01: Waiting
+c0e21dcee623: Waiting
+d6b19a46b795: Waiting
+e6c05e83c163: Waiting
+256d88da4185: Waiting
+345cfa465206: Waiting
+dcb0f55f81ad: Waiting
+6a37524b6019: Layer already exists
+ff39130fdb48: Layer already exists
+e59e7af2d4d2: Layer already exists
+7b5b7a1266c0: Layer already exists
+5f70bf18a086: Layer already exists
+04b6eafdd5ee: Layer already exists
+345cfa465206: Layer already exists
+dcb0f55f81ad: Layer already exists
+399d155a03b0: Layer already exists
+bc352a27a0e4: Layer already exists
+498bbcc60d01: Layer already exists
+c0e21dcee623: Layer already exists
+d6b19a46b795: Layer already exists
+256d88da4185: Layer already exists
+e6c05e83c163: Layer already exists
+2026.09: digest: sha256:dd5af84f65ed10a182d8cba36fd19b9d7afb93741d043851684a6a11741394e8 size: 3461
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.22.04
+#1 transferring dockerfile:
+#1 transferring dockerfile: 4.17kB done
+#1 DONE 0.6s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+#3 DONE 1.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B done
+#4 DONE 0.7s
+
+#5 [common  1/10] FROM docker.io/library/ubuntu:22.04
+#5 DONE 0.0s
+
+#6 [gpu 1/6] FROM docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04@sha256:85fb7ac694079fff1061a0140fd5b5a641997880e12112d92589c3bbb1e8b7ca
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 616B done
+#7 DONE 0.7s
+
+#8 [common  2/10] WORKDIR /opt
+#8 CACHED
+
+#9 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.42.3     && plenv global 5.42.3     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace     && rm -rf /root/.cpanm/work
+#9 CACHED
+
+#10 [common  8/10] RUN tar zxvf sratoolkit.3.4.1-ubuntu64.tar.gz     && mv sratoolkit.3.4.1-ubuntu64/ /opt/sratoolkit.3.4.1     && rm sratoolkit.3.4.1-ubuntu64.tar.gz
+#10 CACHED
+
+#11 [gpu 5/6] RUN cat /root/.alias >> /root/.bashrc
+#11 CACHED
+
+#12 [common  7/10] COPY sratoolkit.3.4.1-ubuntu64.tar.gz sratoolkit.3.4.1-ubuntu64.tar.gz
+#12 CACHED
+
+#13 [gpu 4/6] COPY ./.alias /root
+#13 CACHED
+
+#14 [common  6/10] RUN tar xvfj samtools-1.24.tar.bz2     && cd samtools-1.24     && ./configure     && make && make install     && rm /opt/samtools-1.24.tar.bz2
+#14 CACHED
+
+#15 [common  5/10] COPY samtools-1.24.tar.bz2 samtools-1.24.tar.bz2
+#15 CACHED
+
+#16 [common  3/10] RUN useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#16 CACHED
+
+#17 [common 10/10] RUN gpasswd -a ubuntu sudo
+#17 CACHED
+
+#18 [gpu 2/6] COPY isnumber.sh /opt/bin/isnumber.sh
+#18 CACHED
+
+#19 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libcurl4-openssl-dev         libdeflate-dev         libgd-dev         libncurses5-dev         libssl-dev         locales         make         nkf         openjdk-21-jdk-headless         openjdk-21-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#19 CACHED
+
+#20 [gpu 3/6] COPY --from=common / /
+#20 CACHED
+
+#21 [gpu 6/6] WORKDIR /home/ubuntu
+#21 CACHED
+
+#22 exporting to image
+#22 exporting layers done
+#22 writing image sha256:e21e94f2e9ca07961ddc786bbe192a80d6fc83b057560d46f39db445b4d18670 0.0s done
+#22 naming to docker.io/rnakato/ubuntu_gpu_22.04:latest
+#22 naming to docker.io/rnakato/ubuntu_gpu_22.04:latest 0.1s done
+#22 DONE 0.2s
+The push refers to repository [docker.io/rnakato/ubuntu_gpu_22.04]
+5f70bf18a086: Preparing
+e59e7af2d4d2: Preparing
+7b5b7a1266c0: Preparing
+6a37524b6019: Preparing
+ff39130fdb48: Preparing
+04b6eafdd5ee: Preparing
+345cfa465206: Preparing
+dcb0f55f81ad: Preparing
+399d155a03b0: Preparing
+bc352a27a0e4: Preparing
+498bbcc60d01: Preparing
+c0e21dcee623: Preparing
+d6b19a46b795: Preparing
+e6c05e83c163: Preparing
+256d88da4185: Preparing
+04b6eafdd5ee: Waiting
+c0e21dcee623: Waiting
+345cfa465206: Waiting
+d6b19a46b795: Waiting
+e6c05e83c163: Waiting
+dcb0f55f81ad: Waiting
+399d155a03b0: Waiting
+bc352a27a0e4: Waiting
+498bbcc60d01: Waiting
+256d88da4185: Waiting
+ff39130fdb48: Layer already exists
+7b5b7a1266c0: Layer already exists
+5f70bf18a086: Layer already exists
+e59e7af2d4d2: Layer already exists
+6a37524b6019: Layer already exists
+04b6eafdd5ee: Layer already exists
+345cfa465206: Layer already exists
+dcb0f55f81ad: Layer already exists
+399d155a03b0: Layer already exists
+bc352a27a0e4: Layer already exists
+498bbcc60d01: Layer already exists
+d6b19a46b795: Layer already exists
+e6c05e83c163: Layer already exists
+c0e21dcee623: Layer already exists
+256d88da4185: Layer already exists
+latest: digest: sha256:dd5af84f65ed10a182d8cba36fd19b9d7afb93741d043851684a6a11741394e8 size: 3461
