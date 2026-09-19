@@ -106,7 +106,7 @@ USER ubuntu
 WORKDIR /home/ubuntu
 CMD ["/bin/bash"]
 
-FROM nvidia/cuda:13.3.1-cudnn-runtime-ubuntu24.04 AS gpu
+FROM nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04 AS gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8

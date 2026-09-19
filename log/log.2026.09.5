@@ -1,0 +1,369 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.24.04
+#1 transferring dockerfile:
+#1 transferring dockerfile: 4.30kB done
+#1 DONE 0.6s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:24.04
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04
+#3 ...
+
+#4 [auth] nvidia/cuda:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04
+#3 DONE 3.4s
+
+#5 [internal] load .dockerignore
+#5 transferring context:
+#5 transferring context: 2B done
+#5 DONE 0.5s
+
+#6 [common  1/10] FROM docker.io/library/ubuntu:24.04
+#6 DONE 0.0s
+
+#7 [gpu 1/6] FROM docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04@sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc
+#7 resolve docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04@sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc
+#7 resolve docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04@sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc 1.4s done
+#7 DONE 1.4s
+
+#8 [internal] load build context
+#8 transferring context: 616B 0.0s done
+#8 DONE 1.8s
+
+#7 [gpu 1/6] FROM docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04@sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc
+#7 sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc 743B / 743B done
+#7 sha256:5380b8155c710531212b65503b39fd7fef0715fef8aa4de791f67ba4faad4d7f 2.84kB / 2.84kB done
+#7 ...
+
+#9 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libcurl4-openssl-dev         libdeflate-dev         libgd-dev         libncurses-dev         libssl-dev         locales         make         nkf         openjdk-21-jdk-headless         openjdk-21-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#9 CACHED
+
+#10 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.42.3     && plenv global 5.42.3     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace     && rm -rf /root/.cpanm/work
+#10 CACHED
+
+#11 [common  6/10] RUN tar xvfj samtools-1.24.tar.bz2     && cd samtools-1.24     && ./configure     && make && make install     && rm /opt/samtools-1.24.tar.bz2
+#11 CACHED
+
+#12 [common  7/10] COPY sratoolkit.3.4.1-ubuntu64.tar.gz sratoolkit.3.4.1-ubuntu64.tar.gz
+#12 CACHED
+
+#13 [common  2/10] WORKDIR /opt
+#13 CACHED
+
+#14 [common  3/10] RUN userdel -r ubuntu 2>/dev/null || true   && useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#14 CACHED
+
+#15 [common  8/10] RUN tar zxvf sratoolkit.3.4.1-ubuntu64.tar.gz     && mv sratoolkit.3.4.1-ubuntu64/ /opt/sratoolkit.3.4.1     && rm sratoolkit.3.4.1-ubuntu64.tar.gz
+#15 CACHED
+
+#16 [common  5/10] COPY samtools-1.24.tar.bz2 samtools-1.24.tar.bz2
+#16 CACHED
+
+#17 [common 10/10] RUN gpasswd -a ubuntu sudo
+#17 CACHED
+
+#7 [gpu 1/6] FROM docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04@sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc
+#7 sha256:cf830e4234e006bde7323c1fa488dbd4865ed955fd91b5f1bad9af3d070c3462 19.27kB / 19.27kB done
+#7 sha256:e11d6318d8bef8a1b99dd393ac6845ebf117c9f68c81624692e00d576432f469 0B / 5.16MB 0.2s
+#7 sha256:761ae241e4c2488ad2b48982d0d7583c52b904b7ee952a117fe56567ad8aba95 0B / 376.27kB 0.4s
+#7 sha256:e11d6318d8bef8a1b99dd393ac6845ebf117c9f68c81624692e00d576432f469 3.15MB / 5.16MB 0.5s
+#7 sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081 0B / 29.73MB 0.5s
+#7 sha256:e11d6318d8bef8a1b99dd393ac6845ebf117c9f68c81624692e00d576432f469 5.16MB / 5.16MB 0.6s done
+#7 sha256:761ae241e4c2488ad2b48982d0d7583c52b904b7ee952a117fe56567ad8aba95 376.27kB / 376.27kB 0.6s
+#7 sha256:761ae241e4c2488ad2b48982d0d7583c52b904b7ee952a117fe56567ad8aba95 376.27kB / 376.27kB 0.7s done
+#7 sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081 9.44MB / 29.73MB 0.9s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 0B / 103.23MB 0.9s
+#7 sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081 23.07MB / 29.73MB 1.1s
+#7 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0B / 32B 1.1s
+#7 sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081 29.73MB / 29.73MB 1.3s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 5.24MB / 103.23MB 1.3s
+#7 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 1.3s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 17.83MB / 103.23MB 1.5s
+#7 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 1.4s done
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 31.46MB / 103.23MB 1.7s
+#7 sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081 29.73MB / 29.73MB 1.7s done
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 37.75MB / 103.23MB 1.8s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 52.45MB / 103.23MB 2.0s
+#7 extracting sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081
+#7 sha256:adae47ab9b6f583ae88e5f7946860091639ec39b96e204f851e932fcdc4c1351 0B / 184B 2.0s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 59.77MB / 103.23MB 2.1s
+#7 sha256:adae47ab9b6f583ae88e5f7946860091639ec39b96e204f851e932fcdc4c1351 184B / 184B 2.1s
+#7 sha256:1dca0c9bc5f79f4cedcd68523b7682fb46a1b1546351bc67289e9440608187fd 0B / 6.88kB 2.1s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 73.40MB / 103.23MB 2.3s
+#7 sha256:adae47ab9b6f583ae88e5f7946860091639ec39b96e204f851e932fcdc4c1351 184B / 184B 2.2s done
+#7 sha256:1dca0c9bc5f79f4cedcd68523b7682fb46a1b1546351bc67289e9440608187fd 6.88kB / 6.88kB 2.3s done
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 79.69MB / 103.23MB 2.5s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 0B / 2.30GB 2.6s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 89.13MB / 103.23MB 2.7s
+#7 sha256:2a5703d89dc74187998c37f1e8668a158c195961801189556e347d287b6a47a9 0B / 60.03kB 2.9s
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 98.57MB / 103.23MB 3.1s
+#7 extracting sha256:b40150c1c2717d324cdb17278c8efdfa4dfcd2ffe083e976f0bcedf31115f081 1.1s done
+#7 sha256:2a5703d89dc74187998c37f1e8668a158c195961801189556e347d287b6a47a9 60.03kB / 60.03kB 3.1s
+#7 sha256:2a5703d89dc74187998c37f1e8668a158c195961801189556e347d287b6a47a9 60.03kB / 60.03kB 3.2s done
+#7 extracting sha256:e11d6318d8bef8a1b99dd393ac6845ebf117c9f68c81624692e00d576432f469
+#7 sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 103.23MB / 103.23MB 4.1s done
+#7 sha256:62b81882c317bac2e1b871ecc97077fe29a2b1e6c12570091270f3d43cf39542 0B / 1.68kB 4.4s
+#7 sha256:f34b8dc4eed321a3c34de1b22718a453ac047c27ab3b5e4b1da290c98417ebb8 0B / 1.52kB 4.5s
+#7 extracting sha256:e11d6318d8bef8a1b99dd393ac6845ebf117c9f68c81624692e00d576432f469 0.5s done
+#7 sha256:62b81882c317bac2e1b871ecc97077fe29a2b1e6c12570091270f3d43cf39542 1.68kB / 1.68kB 4.6s done
+#7 sha256:f34b8dc4eed321a3c34de1b22718a453ac047c27ab3b5e4b1da290c98417ebb8 1.52kB / 1.52kB 4.8s
+#7 sha256:f34b8dc4eed321a3c34de1b22718a453ac047c27ab3b5e4b1da290c98417ebb8 1.52kB / 1.52kB 4.9s done
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 0B / 711.48MB 5.3s
+#7 extracting sha256:761ae241e4c2488ad2b48982d0d7583c52b904b7ee952a117fe56567ad8aba95 0.1s done
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 115.34MB / 2.30GB 5.6s
+#7 extracting sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 35.65MB / 711.48MB 6.9s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 73.40MB / 711.48MB 8.1s
+#7 extracting sha256:020c9394f8c3b8371d967e0fb27b856ca0cb12fb02e21bd608710fa24fa62035 2.2s done
+#7 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#7 extracting sha256:adae47ab9b6f583ae88e5f7946860091639ec39b96e204f851e932fcdc4c1351 done
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 109.05MB / 711.48MB 9.3s
+#7 extracting sha256:1dca0c9bc5f79f4cedcd68523b7682fb46a1b1546351bc67289e9440608187fd
+#7 extracting sha256:1dca0c9bc5f79f4cedcd68523b7682fb46a1b1546351bc67289e9440608187fd done
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 230.69MB / 2.30GB 9.6s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 150.99MB / 711.48MB 10.4s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 187.70MB / 711.48MB 11.3s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 223.35MB / 711.48MB 12.2s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 347.08MB / 2.30GB 12.6s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 260.05MB / 711.48MB 13.0s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 297.80MB / 711.48MB 14.2s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 338.69MB / 711.48MB 15.7s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 464.52MB / 2.30GB 16.5s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 379.58MB / 711.48MB 17.2s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 415.24MB / 711.48MB 18.6s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 457.18MB / 711.48MB 19.7s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 583.01MB / 2.30GB 20.6s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 495.98MB / 711.48MB 20.8s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 535.82MB / 711.48MB 21.8s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 575.67MB / 711.48MB 22.8s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 612.37MB / 711.48MB 23.8s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 703.59MB / 2.30GB 24.0s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 649.07MB / 711.48MB 24.8s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 685.77MB / 711.48MB 25.8s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 819.99MB / 2.30GB 27.2s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 946.86MB / 2.30GB 29.2s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 711.48MB / 711.48MB 30.8s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.07GB / 2.30GB 31.0s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.20GB / 2.30GB 33.2s
+#7 sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 711.48MB / 711.48MB 33.5s done
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.31GB / 2.30GB 35.6s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.44GB / 2.30GB 38.8s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.56GB / 2.30GB 41.5s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.68GB / 2.30GB 43.4s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.80GB / 2.30GB 45.3s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 1.91GB / 2.30GB 47.3s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 2.03GB / 2.30GB 50.2s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 2.15GB / 2.30GB 52.8s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 2.27GB / 2.30GB 55.1s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 2.30GB / 2.30GB 60.1s
+#7 sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 2.30GB / 2.30GB 61.4s done
+#7 extracting sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 0.1s
+#7 extracting sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 5.2s
+#7 extracting sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 10.3s
+#7 extracting sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 15.3s
+#7 extracting sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 20.4s
+#7 extracting sha256:21e333934e1348446c62aade4f760bd53540d289d290c498673bbf81f4e74fd4 23.3s done
+#7 extracting sha256:2a5703d89dc74187998c37f1e8668a158c195961801189556e347d287b6a47a9
+#7 extracting sha256:2a5703d89dc74187998c37f1e8668a158c195961801189556e347d287b6a47a9 done
+#7 extracting sha256:62b81882c317bac2e1b871ecc97077fe29a2b1e6c12570091270f3d43cf39542
+#7 extracting sha256:62b81882c317bac2e1b871ecc97077fe29a2b1e6c12570091270f3d43cf39542 done
+#7 extracting sha256:f34b8dc4eed321a3c34de1b22718a453ac047c27ab3b5e4b1da290c98417ebb8
+#7 extracting sha256:f34b8dc4eed321a3c34de1b22718a453ac047c27ab3b5e4b1da290c98417ebb8 done
+#7 extracting sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57
+#7 extracting sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 5.0s
+#7 extracting sha256:b5dfd7efdce3128d9c6559214cb9fd9a7b99aae13d707269f94e5b923faaef57 7.3s done
+#7 DONE 124.5s
+
+#18 [gpu 2/6] COPY isnumber.sh /opt/bin/isnumber.sh
+#18 DONE 17.1s
+
+#19 [gpu 3/6] COPY --from=common / /
+#19 DONE 67.3s
+
+#20 [gpu 4/6] COPY ./.alias /root
+#20 DONE 2.1s
+
+#21 [gpu 5/6] RUN cat /root/.alias >> /root/.bashrc
+#21 DONE 4.1s
+
+#22 [gpu 6/6] WORKDIR /home/ubuntu
+#22 DONE 2.9s
+
+#23 exporting to image
+#23 exporting layers
+#23 exporting layers 7.7s done
+#23 writing image sha256:43a03c97634e0887b35278047eff052e4f41d20b01b3c83927aad23f9b150354 0.0s done
+#23 naming to docker.io/rnakato/ubuntu_gpu_24.04:2026.09 0.1s done
+#23 DONE 8.1s
+The push refers to repository [docker.io/rnakato/ubuntu_gpu_24.04]
+5f70bf18a086: Preparing
+9ae7be3e4712: Preparing
+99f606c7cc98: Preparing
+ca09b52cb0d0: Preparing
+cfd3832be18f: Preparing
+67f2c2bf625c: Preparing
+e56caf0fcec8: Preparing
+eb8abf3f207e: Preparing
+d7eca8ff0c06: Preparing
+d3064492e510: Preparing
+e7aa027c1ae0: Preparing
+d9377cb8f11c: Preparing
+5f70bf18a086: Preparing
+3817f62ab4b7: Preparing
+8324c62edb05: Preparing
+60c7304165ce: Preparing
+538812a4b9bd: Preparing
+3817f62ab4b7: Waiting
+67f2c2bf625c: Waiting
+d3064492e510: Waiting
+e7aa027c1ae0: Waiting
+d7eca8ff0c06: Waiting
+8324c62edb05: Waiting
+d9377cb8f11c: Waiting
+e56caf0fcec8: Waiting
+60c7304165ce: Waiting
+538812a4b9bd: Waiting
+eb8abf3f207e: Waiting
+ca09b52cb0d0: Layer already exists
+5f70bf18a086: Layer already exists
+67f2c2bf625c: Mounted from nvidia/cuda
+e56caf0fcec8: Mounted from nvidia/cuda
+cfd3832be18f: Pushed
+9ae7be3e4712: Pushed
+99f606c7cc98: Pushed
+eb8abf3f207e: Mounted from nvidia/cuda
+d7eca8ff0c06: Mounted from nvidia/cuda
+e7aa027c1ae0: Mounted from nvidia/cuda
+d3064492e510: Mounted from nvidia/cuda
+d9377cb8f11c: Mounted from nvidia/cuda
+3817f62ab4b7: Mounted from nvidia/cuda
+8324c62edb05: Mounted from nvidia/cuda
+60c7304165ce: Mounted from nvidia/cuda
+538812a4b9bd: Mounted from nvidia/cuda
+2026.09: digest: sha256:bddc8e281d8830f70d464de3b2e8551ac99ead2f99459953882062ccb102085c size: 3878
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.24.04
+#1 transferring dockerfile:
+#1 transferring dockerfile: 4.30kB 0.0s done
+#1 DONE 0.7s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:24.04
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04
+#3 DONE 1.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B done
+#4 DONE 0.9s
+
+#5 [common  1/10] FROM docker.io/library/ubuntu:24.04
+#5 DONE 0.0s
+
+#6 [gpu 1/6] FROM docker.io/nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04@sha256:070f8f2672df1b05b84c0409a5fd1d54ddfd646e5b9d8dee7878131271b563fc
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 616B done
+#7 DONE 0.7s
+
+#8 [common  6/10] RUN tar xvfj samtools-1.24.tar.bz2     && cd samtools-1.24     && ./configure     && make && make install     && rm /opt/samtools-1.24.tar.bz2
+#8 CACHED
+
+#9 [common  9/10] RUN git clone https://github.com/tokuhirom/plenv.git /opt/.plenv     && git clone https://github.com/tokuhirom/Perl-Build.git /opt/.plenv/plugins/perl-build/     && echo 'eval "$(plenv init -)"' >> ~/.bashrc     && . ~/.bashrc     && plenv install 5.42.3     && plenv global 5.42.3     && plenv list-modules     && plenv install-cpanm     && cpanm -f Getopt::Long Math::CDF Excel::Writer::XLSX XML::Simple XSLoader         HTML::TreeBuilder LWP::Protocol::https Config::Std         Statistics::Distributions Path::Class Array::Utils Pod::Usage List::Util         Statistics::Swoop Spreadsheet::ParseExcel App::St CGI Statistics::Lite JSON File::Which         HTML::Template XML::Compile XML::Compile::SOAP11 XML::Compile::WSDL11         XML::Compile::Transport::SOAPHTTP Log::Log4perl Font::TTF::Font Statistics::Basic         Config::General GD Clone Math::Round Params::Validate Math::Bezier List::MoreUtils IO::Socket::SSL         Math::VecStat Regexp::Common Set::IntSpan Readonly Text::Format SVG List::Util GD::Graph::lines         XML::LibXML XML::Compile XML::Compile::Cache XML::Compile::SOAP11 Test::LeakTrace     && rm -rf /root/.cpanm/work
+#9 CACHED
+
+#10 [common  7/10] COPY sratoolkit.3.4.1-ubuntu64.tar.gz sratoolkit.3.4.1-ubuntu64.tar.gz
+#10 CACHED
+
+#11 [gpu 4/6] COPY ./.alias /root
+#11 CACHED
+
+#12 [common  4/10] RUN apt-get update && apt-get install -y --no-install-recommends         apt-file         apt-utils         build-essential         cmake         curl         fd-find         fish         git         htop         language-pack-ja-base         language-pack-ja         less         libbz2-dev         libcurl4-openssl-dev         libdeflate-dev         libgd-dev         libncurses-dev         libssl-dev         locales         make         nkf         openjdk-21-jdk-headless         openjdk-21-jre         patch         pkg-config         software-properties-common         sudo         tree         vim         wget     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer     && fc-cache -f     && apt-get clean     && rm -rf /var/lib/apt/lists
+#12 CACHED
+
+#13 [common  5/10] COPY samtools-1.24.tar.bz2 samtools-1.24.tar.bz2
+#13 CACHED
+
+#14 [common  8/10] RUN tar zxvf sratoolkit.3.4.1-ubuntu64.tar.gz     && mv sratoolkit.3.4.1-ubuntu64/ /opt/sratoolkit.3.4.1     && rm sratoolkit.3.4.1-ubuntu64.tar.gz
+#14 CACHED
+
+#15 [common  2/10] WORKDIR /opt
+#15 CACHED
+
+#16 [gpu 3/6] COPY --from=common / /
+#16 CACHED
+
+#17 [gpu 5/6] RUN cat /root/.alias >> /root/.bashrc
+#17 CACHED
+
+#18 [common 10/10] RUN gpasswd -a ubuntu sudo
+#18 CACHED
+
+#19 [common  3/10] RUN userdel -r ubuntu 2>/dev/null || true   && useradd ubuntu -m -u 55555   && echo "ubuntu:ubuntu" | chpasswd
+#19 CACHED
+
+#20 [gpu 2/6] COPY isnumber.sh /opt/bin/isnumber.sh
+#20 CACHED
+
+#21 [gpu 6/6] WORKDIR /home/ubuntu
+#21 CACHED
+
+#22 exporting to image
+#22 exporting layers done
+#22 writing image sha256:43a03c97634e0887b35278047eff052e4f41d20b01b3c83927aad23f9b150354 0.0s done
+#22 naming to docker.io/rnakato/ubuntu_gpu_24.04:latest
+#22 naming to docker.io/rnakato/ubuntu_gpu_24.04:latest 0.1s done
+#22 DONE 0.4s
+The push refers to repository [docker.io/rnakato/ubuntu_gpu_24.04]
+5f70bf18a086: Preparing
+9ae7be3e4712: Preparing
+99f606c7cc98: Preparing
+ca09b52cb0d0: Preparing
+cfd3832be18f: Preparing
+67f2c2bf625c: Preparing
+e56caf0fcec8: Preparing
+eb8abf3f207e: Preparing
+d7eca8ff0c06: Preparing
+d3064492e510: Preparing
+e7aa027c1ae0: Preparing
+d9377cb8f11c: Preparing
+5f70bf18a086: Preparing
+3817f62ab4b7: Preparing
+8324c62edb05: Preparing
+60c7304165ce: Preparing
+538812a4b9bd: Preparing
+d7eca8ff0c06: Waiting
+d3064492e510: Waiting
+e7aa027c1ae0: Waiting
+d9377cb8f11c: Waiting
+3817f62ab4b7: Waiting
+8324c62edb05: Waiting
+60c7304165ce: Waiting
+538812a4b9bd: Waiting
+e56caf0fcec8: Waiting
+67f2c2bf625c: Waiting
+eb8abf3f207e: Waiting
+cfd3832be18f: Layer already exists
+9ae7be3e4712: Layer already exists
+99f606c7cc98: Layer already exists
+ca09b52cb0d0: Layer already exists
+5f70bf18a086: Layer already exists
+67f2c2bf625c: Layer already exists
+e56caf0fcec8: Layer already exists
+d7eca8ff0c06: Layer already exists
+d3064492e510: Layer already exists
+eb8abf3f207e: Layer already exists
+e7aa027c1ae0: Layer already exists
+d9377cb8f11c: Layer already exists
+3817f62ab4b7: Layer already exists
+60c7304165ce: Layer already exists
+8324c62edb05: Layer already exists
+538812a4b9bd: Layer already exists
+latest: digest: sha256:bddc8e281d8830f70d464de3b2e8551ac99ead2f99459953882062ccb102085c size: 3878

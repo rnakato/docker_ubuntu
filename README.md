@@ -3,7 +3,8 @@
 - Ubuntu 26.04/24.04/22.04/20.04
 
 - GPU mode
-   - 26.04/24.04: cuda:13.3.1-cudnn-runtime (CUDA 13.3, cuDNN 9.24)
+   - 26.04: cuda:13.3.1-cudnn-runtime (CUDA 13.3, cuDNN 9.24)
+   - 24.04: cuda:12.9.2-cudnn-runtime (CUDA 12.9, cuDNN 9.10)
    - 22.04/20.04: cuda:11.8.0-cudnn8-runtime (CUDA 11.8, cuDNN 8)
 
 - Perl (with plenv)
@@ -29,7 +30,9 @@
   - Added Ubuntu 26.04 and 24.04
     - `libncurses5-dev` is no longer available; replaced with `libncurses-dev`
     - The base images ship an `ubuntu` user (UID 1000), which is recreated with UID 55555
-    - GPU mode uses cuda:13.3.1-cudnn-runtime (the only tag available for 26.04)
+    - GPU mode uses cuda:12.9.2-cudnn-runtime for 24.04, and cuda:13.3.1-cudnn-runtime
+      for 26.04 (the only tag available). CUDA 13 requires driver >= 570, so 24.04 stays
+      on CUDA 12, which also runs on driver 550
 
 - 2026.06
   - Added ``isnumber.sh``
